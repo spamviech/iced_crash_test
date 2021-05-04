@@ -1,5 +1,5 @@
 [package]
-name = "iced_test"
+name = "iced_crash_test"
 version = "0.1.0"
 authors = ["spamviech <spamviech@web.de>"]
 edition = "2018"
