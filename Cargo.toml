@@ -11,5 +11,7 @@ edition = "2018"
 [dependencies.iced]
 # ices_aw only works with git-version for now
 git = "https://github.com/hecrj/iced"
-rev = "4b8ba8309f6645cdcb5bd605f8dd88097f8ee5a7"
+# rev = "4b8ba8309f6645cdcb5bd605f8dd88097f8ee5a7"
+branch = "lyon-0.17"
+# rev = "bfa08d6d69e689d6951d3bf36e00f9e5b7fe225d"
 features = ["glow","glow_canvas"]

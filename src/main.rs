@@ -32,7 +32,7 @@ impl Application for App {
     fn update(
         &mut self,
         _message: Self::Message,
-        _clipboard: &mut Clipboard,
+        // _clipboard: &mut Clipboard,
     ) -> Command<Self::Message> {
         Command::none()
     }
