@@ -42,8 +42,8 @@ impl Application for App {
         canvas::Canvas::new(canvas)
             .width(Length::Fill)
             .height(Length::Fill)
-            .width(Length::Fill)
-            .height(Length::Fill)
+            .width(Length::Units(1024))
+            .height(Length::Units(768))
             .into()
     }
 }
@@ -51,7 +51,7 @@ impl Application for App {
 pub struct Canvas {
     kreuzung: Kreuzung,
     rotation: f32,
-    grab: Option<Vector>,
+    // grab: Option<Vector>,
     position: Vector,
     cache: canvas::Cache,
 }
@@ -66,7 +66,7 @@ impl Canvas {
                 beschreibung,
             },
             rotation,
-            grab: None,
+            // grab: None,
             position: Vector::new(0., 122.399994),
             cache: canvas::Cache::new(),
         }
@@ -108,6 +108,7 @@ impl<T> canvas::Program<T> for Canvas {
         })]
     }
 
+    /*
     fn update(
         &mut self,
         event: canvas::Event,
@@ -152,6 +153,7 @@ impl<T> canvas::Program<T> for Canvas {
         }
         (event_status, None)
     }
+    */
 }
 
 mod background {
@@ -208,6 +210,7 @@ impl Transformation {
     }
 }
 
+/*
 mod gerade {
     use super::*;
 
@@ -235,6 +238,7 @@ mod gerade {
         (transformations, path_builder.build())
     }
 }
+*/
 
 mod kurve {
     use super::*;
@@ -364,8 +368,10 @@ impl Kreuzung {
         let angle = self.angle();
         let mut paths = Vec::new();
         // Geraden
+        /*
         let horizontal_transformations =
             vec![Transformation::Translate(Vector::new(start_x, start_y))];
+        */
         let gedreht_transformations = vec![
             Transformation::Translate(Vector::new(half_width, half_height)),
             Transformation::Rotate(angle),
@@ -373,6 +379,7 @@ impl Kreuzung {
             Transformation::Translate(Vector::new(-half_width, half_height)),
             Transformation::Translate(Vector::new(start_x, -start_y)),
         ];
+        /*
         paths.push(gerade::fuelle(
             self.laenge,
             horizontal_transformations.clone(),
@@ -383,14 +390,17 @@ impl Kreuzung {
             gedreht_transformations.clone(),
             true,
         ));
+        */
         // Kurven
         if self.variante == Variante::MitKurve {
+            /*
             paths.push(kurve::fuelle(
                 self.radius,
                 angle,
                 horizontal_transformations,
                 false,
             ));
+            */
             paths.push(kurve::fuelle(
                 self.radius,
                 angle,
