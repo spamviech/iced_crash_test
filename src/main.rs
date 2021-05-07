@@ -67,7 +67,7 @@ impl Canvas {
             },
             rotation,
             grab: None,
-            position: Vector::new(0., 0.),
+            position: Vector::new(0., 122.399994),
             cache: canvas::Cache::new(),
         }
     }
@@ -120,13 +120,13 @@ impl<T> canvas::Program<T> for Canvas {
                 if cursor.is_over(&bounds) =>
             {
                 self.grab = cursor.position_in(&bounds).map(|p| Vector::new(p.x, p.y));
-                canvas::event::Status::Captured
+                Captured
             }
             canvas::Event::Mouse(mouse::Event::ButtonReleased(iced::mouse::Button::Left))
-                if self.grab.is_some()  =>
+                if self.grab.is_some() =>
             {
                 self.grab = None;
-                canvas::event::Status::Captured
+                Captured
             }
             canvas::Event::Mouse(mouse::Event::CursorMoved { position: _ })
                 if cursor.is_over(&bounds) =>
@@ -137,15 +137,15 @@ impl<T> canvas::Program<T> for Canvas {
                         let movement = in_vec - last_pos;
                         self.position = self.position + movement;
                         self.grab = Some(in_vec);
-                        canvas::event::Status::Captured
+                        Captured
                     } else {
-                        canvas::event::Status::Ignored
+                        Ignored
                     }
                 } else {
-                    canvas::event::Status::Ignored
+                    Ignored
                 }
             }
-            _ => canvas::event::Status::Ignored,
+            _ => Ignored,
         };
         if event_status == Captured {
             self.cache.clear();
