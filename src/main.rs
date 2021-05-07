@@ -83,7 +83,8 @@ impl<T> canvas::Program<T> for Canvas {
             center.x /= 2.;
             center.y /= 2.;
             let final_position = center + self.position;
-            let a = if self.grab.is_some() { 0.5 } else { 1. };
+            // let a = if self.grab.is_some() { 0.5 } else { 1. };
+            let a = 1.;
             frame.with_save(|frame| {
                 frame.translate(final_position);
                 frame.rotate(self.rotation);
@@ -116,19 +117,19 @@ impl<T> canvas::Program<T> for Canvas {
         use canvas::event::Status::*;
         let event_status = match event {
             canvas::Event::Mouse(mouse::Event::ButtonPressed(iced::mouse::Button::Left))
-                if cursor.is_over(&bounds) && self.rotation > FRAC_PI_2 =>
+                if cursor.is_over(&bounds) =>
             {
                 self.grab = cursor.position_in(&bounds).map(|p| Vector::new(p.x, p.y));
                 canvas::event::Status::Captured
             }
             canvas::Event::Mouse(mouse::Event::ButtonReleased(iced::mouse::Button::Left))
-                if self.grab.is_some() && self.rotation > FRAC_PI_2 =>
+                if self.grab.is_some()  =>
             {
                 self.grab = None;
                 canvas::event::Status::Captured
             }
             canvas::Event::Mouse(mouse::Event::CursorMoved { position: _ })
-                if cursor.is_over(&bounds) && self.rotation > FRAC_PI_2 =>
+                if cursor.is_over(&bounds) =>
             {
                 if let Some(last_pos) = self.grab {
                     if let Some(in_pos) = cursor.position_in(&bounds) {
